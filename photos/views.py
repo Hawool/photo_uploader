@@ -14,8 +14,8 @@ class PhotoListCreateView(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         data = []
         # checking files in request and save model
-        for i in request.FILES:
-            serializer = self.get_serializer(data={'image': request.FILES[i], 'owner': request.user.id})
+        for file in request.FILES:
+            serializer = self.get_serializer(data={'image': request.FILES[file], 'owner': request.user.id})
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
             data.append(serializer.data)
